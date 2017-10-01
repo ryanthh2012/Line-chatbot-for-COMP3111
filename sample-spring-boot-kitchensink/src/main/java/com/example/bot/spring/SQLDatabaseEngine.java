@@ -18,7 +18,7 @@ public class SQLDatabaseEngine extends DatabaseEngine {
 		String Response = null;
 
 		try {
-			statement stmt = getConnection().prepareStatement("SELECT * FROM lab3 WHERE keyword = ?");
+			PreparedStatement stmt = getConnection().prepareStatement("SELECT * FROM lab3 WHERE keyword = ?");
 			stmt.setString(1, text);
 			
 			ResultSet rs = stmt.executeQuery();

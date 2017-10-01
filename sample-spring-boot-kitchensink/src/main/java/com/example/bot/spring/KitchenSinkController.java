@@ -242,14 +242,14 @@ public class KitchenSinkController {
                                         new URIAction("Go to line.me",
                                                       "https://line.me"),
                                         new PostbackAction("Say hello1",
-                                                           "hello Ã£ï¿½âþýÃ£þýšâþýÃ£ï¿½Â«Ãþý¿½Â¡Ã£ï¿½Âþý)
+                                                           "hello")
                                 )),
                                 new CarouselColumn(imageUrl, "hoge", "fuga", Arrays.asList(
-                                        new PostbackAction("Ã¨Â¨þýþýhello2",
-                                                           "hello Ã£ï¿½âþýÃ£þýšâþýÃ£ï¿½Â«Ãþý¿½Â¡Ã£ï¿½Âþý,
-                                                           "hello Ã£ï¿½âþýÃ£þýšâþýÃ£ï¿½Â«Ãþý¿½Â¡Ã£ï¿½Âþý),
+                                        new PostbackAction("hello2",
+                                                           "hello",
+                                                           "hello"),
                                         new MessageAction("Say message",
-                                                          "Rice=Ã§Â±Â³")
+                                                          "Rice=")
                                 ))
                         ));
                 TemplateMessage templateMessage = new TemplateMessage("Carousel alt text", carouselTemplate);
