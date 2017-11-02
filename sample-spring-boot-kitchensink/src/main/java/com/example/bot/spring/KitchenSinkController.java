@@ -213,6 +213,17 @@ public class KitchenSinkController {
 
         log.info("Got text message from {}: {}", replyToken, text);
         switch (text) {
+        	case "hello": {
+                String userId = event.getSource().getUserId();
+                if (userId != null) {
+                    lineMessagingClient
+                            .getProfile(userId)
+                            .whenComplete(new Greeting (this, replyToken));
+                } else {
+                    this.replyText(replyToken, "Bot can't use profile API without user ID");
+                }
+                break;
+        	}
             case "profile": {
                 String userId = event.getSource().getUserId();
                 if (userId != null) {
@@ -359,6 +370,26 @@ public class KitchenSinkController {
     	}
     }
 	
-	
+	class Greeting implements BiConsumer<UserProfileResponse, Throwable> {
+		private KitchenSinkController ksc;
+		private String replyToken;
+		
+		public ProfileGetter(KitchenSinkController ksc, String replyToken) {
+			this.ksc = ksc;
+			this.replyToken = replyToken;
+		}
+		@Override
+    	public void accept(UserProfileResponse profile, Throwable throwable) {
+    		if (throwable != null) {
+            	ksc.replyText(replyToken, throwable.getMessage());
+            	return;
+        	}
+        	ksc.reply(
+                	replyToken,
+                	Arrays.asList(new TextMessage(
+                		"Hello " + profile.getDisplayName()) + "!"))
+        	);
+    	}
+    }
 
 }
